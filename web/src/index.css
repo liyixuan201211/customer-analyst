@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* ---------- 设计令牌：参考 DeepSeek Harness / Open WebUI ---------- */
+:root {
+  --bg: #ffffff;
+  --bg-2: #f7f7f8;
+  --bg-3: #efeff1;
+  --bg-elev: #ffffff;
+  --border: rgb(0 0 0 / 8%);
+  --border-2: rgb(0 0 0 / 14%);
+  --fg: #0f1115;
+  --fg-2: #61666b;
+  --fg-3: #81858c;
+  --brand: #4d6bfe;
+  --brand-fg: #ffffff;
+  --brand-soft: rgb(77 107 254 / 10%);
+  --user-bubble: #eff3ff;
+  --user-fg: #0f1115;
+  --code-bg: #f3f4f6;
+  --pre-bg: #1a1b1e;
+  --pre-fg: #e6e8eb;
+  --scrollbar: rgb(0 0 0 / 15%);
+  --scrollbar-hover: rgb(0 0 0 / 28%);
+  --shadow: 0 1px 2px rgb(0 0 0 / 4%), 0 4px 16px rgb(0 0 0 / 5%);
+  --ok: #16a34a; --warn: #d97706; --danger: #dc2626;
+  color-scheme: light;
+}
+.dark {
+  --bg: #151517;
+  --bg-2: #1c1c1f;
+  --bg-3: #232326;
+  --bg-elev: #1f1f22;
+  --border: rgb(255 255 255 / 9%);
+  --border-2: rgb(255 255 255 / 16%);
+  --fg: #f4f4f5;
+  --fg-2: #b5b9bf;
+  --fg-3: #85898f;
+  --brand: #6b85ff;
+  --brand-fg: #ffffff;
+  --brand-soft: rgb(107 133 255 / 16%);
+  --user-bubble: #2a2f45;
+  --user-fg: #f4f4f5;
+  --code-bg: #26272b;
+  --pre-bg: #0d0e11;
+  --pre-fg: #e6e8eb;
+  --scrollbar: rgb(255 255 255 / 16%);
+  --scrollbar-hover: rgb(255 255 255 / 30%);
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 4px 16px rgb(0 0 0 / 30%);
+  --ok: #4ade80; --warn: #fbbf24; --danger: #f87171;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-elev: var(--bg-elev);
+  --color-line: var(--border);
+  --color-line-2: var(--border-2);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-brand: var(--brand);
+  --color-brand-fg: var(--brand-fg);
+  --color-brand-soft: var(--brand-soft);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+}
+
+html, body, #root { height: 100%; margin: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--bg); color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  transition: background .15s, color .15s;
+}
+button, input, select, textarea { font-family: inherit; color: inherit; }
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 8px; }
+*::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- Markdown ---------- */
+.md { line-height: 1.75; font-size: 14.5px; word-break: break-word; color: var(--fg); }
+.md > *:first-child { margin-top: 0; } .md > *:last-child { margin-bottom: 0; }
+.md h1, .md h2, .md h3, .md h4 { font-weight: 600; margin: 1.1em 0 .5em; line-height: 1.35; }
+.md h1 { font-size: 1.35em; } .md h2 { font-size: 1.2em; } .md h3 { font-size: 1.08em; }
+.md p { margin: .55em 0; }
+.md ul, .md ol { padding-left: 1.5em; margin: .5em 0; }
+.md li { margin: .22em 0; } .md li > p { margin: .15em 0; }
+.md code { background: var(--code-bg); padding: .12em .4em; border-radius: 5px; font-size: .88em; font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace; }
+.md pre { background: var(--pre-bg); color: var(--pre-fg); padding: .9em 1.1em; border-radius: 12px; overflow-x: auto; margin: .7em 0; font-size: 13px; line-height: 1.6; }
+.md pre code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
+.md table { border-collapse: separate; border-spacing: 0; margin: .7em 0; width: 100%; font-size: 13px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.md th, .md td { border-bottom: 1px solid var(--border); padding: .45em .7em; text-align: left; vertical-align: top; }
+.md th { background: var(--bg-2); font-weight: 600; }
+.md tr:last-child td { border-bottom: 0; }
+.md blockquote { border-left: 3px solid var(--border-2); margin: .6em 0; padding: .2em .9em; color: var(--fg-2); }
+.md hr { border: 0; border-top: 1px solid var(--border); margin: 1.1em 0; }
+.md a { color: var(--brand); text-decoration: none; } .md a:hover { text-decoration: underline; }
+.md strong { font-weight: 600; }
+.md img { max-width: 100%; border-radius: 10px; }
+
+@keyframes pulse-dot { 0%, 80%, 100% { opacity: .25 } 40% { opacity: 1 } }
+.dot { animation: pulse-dot 1.2s infinite ease-in-out; }
+.dot:nth-child(2) { animation-delay: .2s } .dot:nth-child(3) { animation-delay: .4s }
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px) } to { opacity: 1; transform: none } }
+.fade-in { animation: fade-in .18s ease-out; }
+.shimmer { background: linear-gradient(90deg, var(--fg-3) 0%, var(--fg) 50%, var(--fg-3) 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 1.6s linear infinite; }
+@keyframes shimmer { from { background-position: 200% 0 } to { background-position: -200% 0 } }

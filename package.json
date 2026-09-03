@@ -1,0 +1,14 @@
+{
+  "name": "analyst",
+  "private": true,
+  "version": "0.1.0",
+  "description": "客户分析智能体 — 三分栏商业客户分析平台",
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c blue,green \"pnpm --filter @analyst/server dev\" \"pnpm --filter @analyst/web dev\"",
+    "build": "pnpm --filter @analyst/web build",
+    "start": "pnpm --filter @analyst/server start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

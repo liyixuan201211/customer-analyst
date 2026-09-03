@@ -1,0 +1,8 @@
+packages:
+  - server
+  - web
+verifyDepsBeforeRun: false
+ignoredBuiltDependencies:
+  - esbuild
+allowBuilds:
+  esbuild: set this to true or false

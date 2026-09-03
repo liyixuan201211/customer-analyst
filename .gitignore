@@ -1,0 +1,14 @@
+node_modules
+dist
+uploads/
+.env
+.DS_Store
+# 本地数据 / 运行时产物（含客户数据与备份）
+data/
+*.db
+*.db-wal
+*.db-shm
+# 证书/密钥等
+*.pem
+*.key
+*.p12
