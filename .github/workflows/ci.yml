@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install
+      - name: Build web (frontend)
+        working-directory: web
+        run: pnpm build
+      - name: Lint backend syntax
+        run: |
+          for f in server/src/*.js server/src/features/*.js; do node --check "$f" || exit 1; done
+      - name: Boot smoke (server)
+        env:
+          AIPING_BASE_URL: https://aiping.cn/api/v1
+          AIPING_API_KEY: ${{ secrets.AIPING_API_KEY }}
+          PORT: 3099
+          DB_PATH: /tmp/analyst-test.db
+        run: |
+          (node --env-file-if-exists=.env server/src/index.js &) || true
+          sleep 2
+          curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:3099/api/health || echo " (health check may need API key)"

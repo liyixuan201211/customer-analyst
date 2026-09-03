@@ -12,3 +12,5 @@ data/
 *.pem
 *.key
 *.p12
+*.bundle
+*.tar.gz

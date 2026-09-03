@@ -1,0 +1,8 @@
+node_modules
+dist
+data
+.git
+.env
+*.bundle
+*.tar.gz
+docs
