@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trash2, Plus, Copy } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';

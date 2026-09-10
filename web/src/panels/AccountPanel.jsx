@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useStore } from '../store/index.js';
 import { useI18n, LOCALES } from '../i18n.js';
 import { Section, Card, Btn, Input, Select, Tag } from './ui.jsx';

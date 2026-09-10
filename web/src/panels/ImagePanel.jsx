@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Card, Empty } from './ui.jsx';
 
 export default function ImagePanel({ images, prompt }) {

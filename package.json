@@ -6,9 +6,15 @@
   "scripts": {
     "dev": "concurrently -k -n server,web -c blue,green \"pnpm --filter @analyst/server dev\" \"pnpm --filter @analyst/web dev\"",
     "build": "pnpm --filter @analyst/web build",
-    "start": "pnpm --filter @analyst/server start"
+    "start": "pnpm --filter @analyst/server start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^9.1.2",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.12.0"
   }
 }

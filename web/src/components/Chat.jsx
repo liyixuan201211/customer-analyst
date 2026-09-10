@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ArrowUp, Square, Paperclip, ImagePlus, X, ChevronDown, ChevronRight, Wrench, Brain, Check, Loader2, Copy, RefreshCw, Pencil, PanelLeftOpen, PanelRightOpen, PanelRightClose, Sparkles, Eye, Globe } from 'lucide-react';
@@ -8,14 +8,12 @@ import { readFileAsDataURL, readFileAsText } from '../lib/api.js';
 
 const TOOL_LABEL = {
   list_customers: '查询客户', get_customer: '读取客户档案', create_customer: '创建客户', update_customer: '更新客户',
-  import_chat_text: '导入聊天记录', get_chat_records: '读取聊天记录', analyze_profile: '深层画像分析', analyze_loyalty: '忠诚度分析',
+  import_chat_text: '导入聊天记录', get_chat_records: '读取聊天记录', analyze_profile: '深层画像分析', analyze_loyalty: '忠诚度分析', 
   generate_table_and_advice: '生成多维表格与话术', create_table: '创建表格', search_knowledge: '知识库检索', add_knowledge: '写入知识库',
   web_search: '联网搜索', fetch_webpage: '抓取网页', list_products: '查询商品', upsert_product: '保存商品', dynamic_pricing: '动态定价',
   adjust_stock: '库存出入库', inventory_report: '库存报告', list_staff: '查询人员', upsert_staff: '保存人员', assign_customer: '分配客户',
   recommend_staff: '推荐跟进人', generate_image: '生成图片',
 };
-
-
 
 export default function Chat() {
   const { messages, streaming, status, send, stop, currentId, conversations, leftOpen, rightOpen, toggleLeft, toggleRight } = useStore();
@@ -110,10 +108,10 @@ function ModelSelector({ conv }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   useEffect(() => { const h = (e) => { if (!ref.current?.contains(e.target)) setOpen(false); }; document.addEventListener('mousedown', h); return () => document.removeEventListener('mousedown', h); }, []);
+  const { t } = useI18n();
   if (!models) return null;
   const current = conv?.model || models.selected.chat;
   const info = models.registry.chat.find((m) => m.id === current);
-  const { t } = useI18n();
   return (
     <div ref={ref} className="relative">
       <button onClick={() => setOpen(!open)} className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium hover:bg-bg-3 transition">
@@ -145,7 +143,7 @@ function Empty({ onPick }) {
   const { t } = useI18n();
   const quick = [['qi_import', 'import_chat'], ['qi_churn', 'churn'], ['qi_table', 'table'], ['qi_kb', 'kb'], ['qi_web', 'web'], ['qi_pricing', 'pricing']];
   const q = {
-    import_chat: '把下面的聊天记录导入并分析客户画像与忠诚度：\n', churn: '帮我列出所有客户，并给出流失风险最高的三位及维系建议',
+    import_chat: '把下面的聊天记录导入并分析客户画像与忠诚度：\n', churn: '帮我列出所有客户，并给出流失风险最高的三位及维系建议', 
     table: '为客户生成多维分析表和建议对话方式', kb: '查询知识库里关于报价政策的资料', web: '联网搜索这家客户公司的最新动态', pricing: '对商品做动态定价分析，考虑客户忠诚度与竞品价格',
   };
   return (

@@ -1,6 +1,5 @@
 // Word / PDF / HTML 报告导出（轻量：HTML 内容即 Word(.doc)，打印即 PDF）
-import { customers, tables, chatRecords } from '../db/index.js';
-import { buildCustomerReportCSV, buildAllCustomersReportCSV } from '../tools/report.js';
+import { customers, tables } from '../db/index.js';
 
 const h = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const esc = (v) => h(v).replace(/\r?\n/g, '<br/>');
@@ -21,5 +20,5 @@ export default function register(api) {
   api.get('/customers/:id/report.doc', (c) => { const cu = customers.get(c.req.param('id')); if (!cu) return c.text('not found', 404); const html = customerDocHtml(cu, c.req.query('locale') || 'zh-CN'); return new Response('\uFEFF' + html, { headers: { 'Content-Type': 'application/msword; charset=utf-8', 'Content-Disposition': `attachment; filename*=UTF-8''${encodeURIComponent('客户报告-' + cu.name)}.doc` } }); });
   api.get('/customers/:id/report.html', (c) => { const cu = customers.get(c.req.param('id')); if (!cu) return c.text('not found', 404); return new Response(customerDocHtml(cu, c.req.query('locale') || 'zh-CN'), { headers: { 'Content-Type': 'text/html; charset=utf-8' } }); });
   // 全部客户 CSV 已足够；此处补充全部客户的 doc 汇总
-  api.get('/report.doc', (c) => { const cs = customers.list(); const rows = cs.map(x => `<tr><td>${esc(x.name)}</td><td>${esc(x.company || '')}</td><td>${esc(x.profile?.summary || '')}</td><td>${esc(x.loyalty?.score ?? '')}</td></tr>`).join(''); const html = `<html><head><meta charset="utf-8"><style>body{font-family:sans-serif} table{border-collapse:collapse} td,th{border:1px solid #ccc;padding:6px} </style></head><body><h1>客户清单</h1><table><tr><th>名称</th><th>公司</th><th>画像摘要</th><th>忠诚度</th></tr>${rows}</table></body></html>`; return new Response('\uFEFF' + html, { headers: { 'Content-Type': 'application/msword; charset=utf-8', 'Content-Disposition': `attachment; filename*=UTF-8''${encodeURIComponent('客户清单.doc')}` } }); });
+  api.get('/report.doc', (_c) => { const cs = customers.list(); const rows = cs.map(x => `<tr><td>${esc(x.name)}</td><td>${esc(x.company || '')}</td><td>${esc(x.profile?.summary || '')}</td><td>${esc(x.loyalty?.score ?? '')}</td></tr>`).join(''); const html = `<html><head><meta charset="utf-8"><style>body{font-family:sans-serif} table{border-collapse:collapse} td,th{border:1px solid #ccc;padding:6px} </style></head><body><h1>客户清单</h1><table><tr><th>名称</th><th>公司</th><th>画像摘要</th><th>忠诚度</th></tr>${rows}</table></body></html>`; return new Response('\uFEFF' + html, { headers: { 'Content-Type': 'application/msword; charset=utf-8', 'Content-Disposition': `attachment; filename*=UTF-8''${encodeURIComponent('客户清单.doc')}` } }); });
 }

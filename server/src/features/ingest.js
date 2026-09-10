@@ -1,6 +1,6 @@
 // 消息直连（ingress）：接收外部 IM 回调，自动同步客户消息进系统
 import { customers, chatRecords } from '../db/index.js';
-import { parseChatText, toTranscript, guessCustomerName } from '../tools/importer.js';
+import { toTranscript, guessCustomerName } from '../tools/importer.js';
 import { getSetting, setSetting } from '../db/index.js';
 import { activity } from '../auth.js';
 

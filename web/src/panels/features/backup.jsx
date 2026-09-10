@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Download, RefreshCw } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Download } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Tag, Btn, Empty } from '../ui.jsx';
+import { Section, Card, Btn, Empty } from '../ui.jsx';
 
 export default function BackupPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { create: 'Create backup', list: 'Backups', empty: 'No backups', restore: 'Restore', records: 'records', tables: 'tables' }
     : { create: '导出全量备份', list: '历史备份', empty: '暂无备份', restore: '恢复', records: '条', tables: '张表' };
   const [list, setList] = useState([]); const [busy, setBusy] = useState(false);

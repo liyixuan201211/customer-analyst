@@ -3,7 +3,7 @@ import { customers, orders, products, followups, chatRecords } from '../db/index
 import { computeRFM } from '../tools/analysis.js';
 import { chatJSON, DEFAULTS } from '../llm/aiping.js';
 
-function gather(intent, ctx) {
+function gather(intent, _ctx) {
   switch (intent) {
     case 'orders': { const o = orders.list({}); const total = o.reduce((s, x) => s + +x.amount, 0); return { intent, label: '成交统计', data: { total: +total.toFixed(2), count: o.length, monthly: last6mo(o) } }; }
     case 'top_customers': { const cs = customers.list(); const arr = cs.map(x => ({ name: x.name, amount: +orders.totalByCustomer(x.id).amount.toFixed(2) })).sort((a, b) => b.amount - a.amount).slice(0, 8); return { intent, label: '重点客户', data: arr }; }

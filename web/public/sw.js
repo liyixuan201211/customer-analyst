@@ -1,6 +1,6 @@
 // PWA Service Worker（离线缓存 app shell + 网络优先）
 const CACHE = 'analyst-v1';
-self.addEventListener('install', (e) => { self.skipWaiting(); });
+self.addEventListener('install', (_e) => { self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);

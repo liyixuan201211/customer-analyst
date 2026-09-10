@@ -1,5 +1,5 @@
 // 客户综合报表：把客户档案、画像、忠诚度、多维表格合成一个可下载的 CSV
-import { customers, chatRecords, tables, staff } from '../db/index.js';
+import { customers, chatRecords, tables } from '../db/index.js';
 import { users } from '../auth.js';
 
 const L = {

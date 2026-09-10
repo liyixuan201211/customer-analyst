@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
 import { useStore } from '../../store/index.js';
 import { Section, Card, Tag, Btn, Input, Select, Empty } from '../ui.jsx';
 
 export default function ApprovalsPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const { user } = useStore(); const isAdm = user?.role === 'admin';
   const TXT = Z ? { pending: 'Pending', approved: 'Approved', rejected: 'Rejected', subject: 'Subject', reason: 'Reason', approve: 'Approve', reject: 'Reject', request: 'Request', btn: 'Review', empty: 'No approvals' }
     : { pending: '待审批', approved: '已通过', rejected: '已拒绝', subject: '主题', reason: '理由', approve: '通过', reject: '拒绝', request: '发起审批', btn: '审批', empty: '暂无审批' };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Smartphone, WifiOff, MonitorSmartphone, Bell, Download } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';

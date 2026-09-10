@@ -7,7 +7,7 @@ const LANGS = [
   ['zh', '中文', 'Chinese'], ['en', 'English', 'English'], ['es', 'Español', 'Spanish'], ['fr', 'Français', 'French'],
   ['de', 'Deutsch', 'German'], ['ru', 'Русский', 'Russian'], ['ar', 'العربية', 'Arabic'], ['pt', 'Português', 'Portuguese'], ['ja', '日本語', 'Japanese'],
 ];
-const LANG_NAME = Object.fromEntries(LANGS.map(([c, n, e]) => [c, e]));
+const LANG_NAME = Object.fromEntries(LANGS.map(([c, _n, e]) => [c, e]));
 
 export default function register(api) {
   api.get('/translate/langs', (c) => c.json(LANGS.map(([code, label, en]) => ({ code, label, name: en }))));

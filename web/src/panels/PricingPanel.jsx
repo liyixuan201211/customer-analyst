@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useI18n } from '../i18n.js';
 import { api } from '../lib/api.js';
-import { useStore } from '../store/index.js';
-import { Section, Card, Tag, Btn, Input, Select, Empty, List, KV } from './ui.jsx';
+
+import { Section, Card, Tag, Btn, Input, Select, List } from './ui.jsx';
 import { PriceBars } from '../components/charts.jsx';
 
 /** 定价结果展示 + 手动计算 */
@@ -33,7 +33,7 @@ export default function PricingPanel({ pricing: init, customerId, applied, produ
         <Card className="space-y-2">
           <div className="grid grid-cols-2 gap-2">
             <div><div className="text-[11px] text-fg-3 mb-0.5">商品</div><Select value={f.product_id} onChange={set('product_id')}><option value="">{t('p_product')}</option>{products.map((p) => <option key={p.id} value={p.id}>{p.name} ¥{p.current_price}</option>)}</Select></div>
-            <div><div className="text-[11px] text-fg-3 mb-0.5">目标客户（可选）</div><Select value={f.customer_id} onChange={set('customer_id')}><option value="">{t('p_general')}</option>{customers.map((c) => <option key={c.id} value={c.id}>{c.name}{c.loyalty ? ` (${c.loyalty.score})` : ''}</option>)}</Select></div>
+            <div><div className="text-[11px] text-fg-3 mb-0.5">{t('p_cust_opt')}</div><Select value={f.customer_id} onChange={set('customer_id')}><option value="">{t('p_general')}</option>{customers.map((c) => <option key={c.id} value={c.id}>{c.name}{c.loyalty ? ` (${c.loyalty.score})` : ''}</option>)}</Select></div>
             <div><div className="text-[11px] text-fg-3 mb-0.5">{t('p_demand')}</div><Input type="number" step="0.1" min="0" max="2" value={f.demand} onChange={set('demand')} /></div>
             <div><div className="text-[11px] text-fg-3 mb-0.5">{t('p_competitor')}</div><Input type="number" placeholder="可选" value={f.competitor_price} onChange={set('competitor_price')} /></div>
             <div><div className="text-[11px] text-fg-3 mb-0.5">{t('p_season')}</div><Input type="number" step="0.05" min="0.5" max="1.5" value={f.season} onChange={set('season')} /></div>

@@ -1,5 +1,5 @@
 // 数据大屏 v2：漏斗/成交趋势/分层/产品 丰富指标
-import { customers, chatRecords, orders, products, followups, staff, tables } from '../db/index.js';
+import { customers, orders, products, followups, staff } from '../db/index.js';
 import { computeRFM } from '../tools/analysis.js';
 
 export default function register(api) {

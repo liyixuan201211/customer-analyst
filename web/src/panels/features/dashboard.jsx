@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Tag, Empty } from '../ui.jsx';
-import { SegmentDonut, ScoreBars } from '../../components/charts.jsx';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
+import { Section, Card, Empty } from '../ui.jsx';
+import { SegmentDonut } from '../../components/charts.jsx';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 export default function DashboardPanel() {
   const { t, locale } = useI18n(); const Z = locale === 'en-US';
@@ -19,7 +19,7 @@ export default function DashboardPanel() {
         <Card><div className="text-[11px] text-fg-3">{TXT.fu}</div><div className="text-lg font-semibold tabular-nums">{d.followup_completion}%</div></Card>
         <Card><div className="text-[11px] text-fg-3">{Z ? 'Customers' : '客户'}</div><div className="text-lg font-semibold tabular-nums">{d.customers}</div><div className="text-[10px] text-fg-3">{d.profiled} profiled</div></Card>
       </div>
-      {d.funnel.length > 0 && <Section title={TXT.funnel}><Card className="space-y-1">{d.funnel.map((s, i) => <div key={s.name} className="flex items-center gap-2 text-xs"><span className="w-12 text-fg-2">{s.name}</span><div className="flex-1 h-5 bg-bg-3 rounded overflow-hidden"><div className="h-full bg-brand/70" style={{ width: Math.max(8, (s.value / d.funnel[0].value) * 100) + '%' }} /></div><span className="w-8 text-right tabular-nums">{s.value}</span></div>)}</Card></Section>}
+      {d.funnel.length > 0 && <Section title={TXT.funnel}><Card className="space-y-1">{d.funnel.map((s, _i) => <div key={s.name} className="flex items-center gap-2 text-xs"><span className="w-12 text-fg-2">{s.name}</span><div className="flex-1 h-5 bg-bg-3 rounded overflow-hidden"><div className="h-full bg-brand/70" style={{ width: Math.max(8, (s.value / d.funnel[0].value) * 100) + '%' }} /></div><span className="w-8 text-right tabular-nums">{s.value}</span></div>)}</Card></Section>}
       {d.revenueByMonth.length > 0 && <Section title={TXT.revenue}><Card><ResponsiveContainer width="100%" height={180}><BarChart data={d.revenueByMonth} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}><CartesianGrid stroke="var(--border)" strokeDasharray="3 3" vertical={false} /><XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--fg-2)' }} axisLine={false} tickLine={false} /><YAxis tick={{ fontSize: 10, fill: 'var(--fg-3)' }} axisLine={false} tickLine={false} width={40} /><Tooltip formatter={v => [`¥${v}`, 'Amount']} contentStyle={{ background: 'var(--elev)', border: '1px solid var(--border-2)', borderRadius: 10, fontSize: 12, color: 'var(--fg)' }} /><Bar dataKey="amount" radius={[6, 6, 0, 0]} fill="var(--brand)" /></BarChart></ResponsiveContainer></Card></Section>}
       {d.segments.length > 0 && <Section title={TXT.segments}><Card><SegmentDonut data={d.segments} /></Card></Section>}
       {d.top_customers.length > 0 && <Section title={TXT.topC}><Card className="space-y-1">{d.top_customers.map((c, i) => <div key={i} className="flex items-center gap-2 text-xs"><span className="w-24 truncate text-fg-2">{c.name}</span><div className="flex-1 h-2 bg-bg-3 rounded-full overflow-hidden"><div className="h-full bg-ok" style={{ width: Math.min(100, (c.amount / (d.top_customers[0].amount || 1)) * 100) + '%' }} /></div><span className="w-16 text-right tabular-nums">¥{c.amount}</span></div>)}</Card></Section>}

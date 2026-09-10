@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Send, Save } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Tag, Btn, Input, Empty } from '../ui.jsx';
+import { Section, Card, Btn, Input } from '../ui.jsx';
 
 const CH = [['dingtalk', '钉钉'], ['wecom', '企业微信'], ['telegram', 'Telegram']];
 export default function NotifyPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { cfg: 'Channels', text: 'Message', channel: 'Channel', send: 'Send test', remind: 'Push reminders', save: 'Save' }
     : { cfg: '渠道配置', text: '消息内容', channel: '渠道', send: '发送测试', remind: '推送到期/审批', save: '保存' };
   const [cfg, setCfg] = useState({}); const [text, setText] = useState(''); const [chan, setChan] = useState('dingtalk');

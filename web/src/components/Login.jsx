@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Sparkles, Globe, User, Lock, UserPlus } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { LOCALES, useI18n } from '../i18n.js';

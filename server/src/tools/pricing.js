@@ -1,5 +1,5 @@
 // 动态定价：基于库存、成本、客户忠诚度/价格敏感度、需求热度的规则引擎 + 可选模型解释
-import { products, customers, getSetting } from '../db/index.js';
+import { getSetting } from '../db/index.js';
 import { chatJSON, DEFAULTS } from '../llm/aiping.js';
 
 /**
@@ -36,16 +36,14 @@ export function computePrice(product, opts = {}) {
     factors.push({ name: '客户忠诚度', value: l, adj: loyaltyAdj });
   }
   // 价格敏感度
-  let sensAdj = 0;
   if (opts.price_sensitivity) {
-    sensAdj = { 高: -0.04, 中: 0, 低: +0.03 }[opts.price_sensitivity] ?? 0;
+    const sensAdj = { 高: -0.04, 中: 0, 低: +0.03 }[opts.price_sensitivity] ?? 0;
     factors.push({ name: '价格敏感度', value: opts.price_sensitivity, adj: sensAdj });
   }
   // 竞品价
-  let compAdj = 0;
   if (opts.competitor_price > 0 && base > 0) {
     const gap = (opts.competitor_price - base) / base;
-    compAdj = Math.max(-0.10, Math.min(0.08, gap * 0.5));
+    const compAdj = Math.max(-0.10, Math.min(0.08, gap * 0.5));
     factors.push({ name: '竞品价格', value: opts.competitor_price, adj: compAdj });
   }
   // 季节/活动
@@ -53,8 +51,7 @@ export function computePrice(product, opts = {}) {
     factors.push({ name: '季节/活动系数', value: opts.season, adj: +opts.season - 1 });
   }
   // 客户紧迫度
-  let urgAdj = 0;
-  if (opts.urgency) { urgAdj = { 高: +0.03, 中: 0, 低: -0.02 }[opts.urgency] ?? 0; factors.push({ name: '客户紧迫度', value: opts.urgency, adj: urgAdj }); }
+  if (opts.urgency) { const urgAdj = { 高: +0.03, 中: 0, 低: -0.02 }[opts.urgency] ?? 0; factors.push({ name: '客户紧迫度', value: opts.urgency, adj: urgAdj }); }
 
   const totalAdj = factors.reduce((s, f) => s + f.adj, 0);
   let price = base * (1 + totalAdj);

@@ -2,7 +2,7 @@
 import { customers, chatRecords, orders, followups } from '../db/index.js';
 import { computeRFM } from '../tools/analysis.js';
 
-function feats(cu, records, fu) {
+function feats(cu, records, _fu) {
   const rfm = computeRFM(cu, records);
   const orderAmt = orders.totalByCustomer(cu.id).amount;
   return { price: (cu.profile?.price_sensitivity?.level === '高' ? 3 : cu.profile?.price_sensitivity?.level === '低' ? 1 : 2), budget: ({ 高: 3, 中: 2, 低: 1 }[cu.profile?.basic?.budget_level] ?? 2), engagement: (cu.profile?.behavior?.engagement ?? 50) / 100, loyalty: (cu.loyalty?.score ?? 50) / 100, rfm_m: rfm.m / 5, order: orderAmt > 0 ? 1 : 0 };

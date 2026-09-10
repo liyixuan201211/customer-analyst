@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FileText, FileDown } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Tag, Btn, Select, Empty } from '../ui.jsx';
+import { Section, Select, Empty } from '../ui.jsx';
 
 export default function ExportdocPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { pick: 'Export report', customer: 'Customer', word: 'Word (.doc)', html: 'HTML', all: 'All customers' }
     : { pick: '导出报告', customer: '客户', word: 'Word (.doc)', html: 'HTML', all: '全部客户' };
   const [custs, setCusts] = useState([]); const [cid, setCid] = useState('');

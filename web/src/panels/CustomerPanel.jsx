@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trash2, Upload, Search, Download, Send } from 'lucide-react';
 import { api, readFileAsDataURL, readFileAsText } from '../lib/api.js';
 import { useStore } from '../store/index.js';
@@ -248,7 +248,6 @@ function Comments({ c, reload }) {
 }
 
 function Records({ c, reload }) {
-  const { t } = useI18n();
   const [text, setText] = useState('');
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');

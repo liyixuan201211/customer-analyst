@@ -1,5 +1,5 @@
 // 审计与合规导出：活动日志筛选 + 全量数据快照 CSV
-import { activity, users } from '../auth.js';
+import { activity } from '../auth.js';
 import { db } from '../db/index.js';
 
 const esc = (v) => `"${String(v ?? '').replace(/"/g, '""').replace(/\r?\n/g, ' ')}"`;
@@ -13,7 +13,7 @@ export default function register(api) {
     if (act) list = list.filter(a => a.action === act);
     return c.json(list);
   });
-  api.get('/audit/export.csv', (c) => {
+  api.get('/audit/export.csv', (_c) => {
     const act = activity.list(5000);
     const lines = ['操作人,动作,对象,对象ID,详情,时间'];
     for (const a of act) lines.push([esc(a.actor_name), esc(a.action), esc(a.entity), esc(a.entity_id), esc(a.detail), esc(new Date(a.created_at).toISOString())].join(','));

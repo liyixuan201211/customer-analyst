@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Copy } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Btn, Input, Select, Empty, Tag } from '../ui.jsx';
+import { Section, Card, Btn, Input } from '../ui.jsx';
 
 export default function IngestPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { cfg: 'Ingress config', token: 'Token', save: 'Save', url: 'Callback URL', test: 'Test with sample', customer: 'Customer' }
     : { cfg: '消息直连配置', token: '令牌', save: '保存', url: '回调地址', test: '用示例测试', customer: '客户' };
-  const [cfg, setCfg] = useState({}); const [show, setShow] = useState(false);
+  const [cfg, setCfg] = useState({});
   useEffect(() => { api.get('/ingest/config').then(setCfg); }, []);
   const save = async () => { await api.post('/ingest/config', { token: cfg.token || '' }); alert('已保存'); };
   const test = async () => {

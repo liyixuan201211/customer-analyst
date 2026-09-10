@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Download } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Tag, Btn, Select, Empty } from '../ui.jsx';
+import { Section, Card, Tag, Empty } from '../ui.jsx';
 
 const ACTC = { create: 'green', update: 'blue', import: 'indigo', analyze: 'indigo', pricing: 'amber', assign: 'blue', add: 'green', comment: 'blue', chat: 'gray', delete: 'red', invite: 'gray' };
 export default function AuditPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { entity: 'Entity', action: 'Action', export: 'Export CSV', empty: 'No activity' }
     : { entity: '对象', action: '动作', export: '导出 CSV', empty: '暂无动态' };
   const [list, setList] = useState([]);

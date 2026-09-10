@@ -1,9 +1,8 @@
 // 认证模块：scrypt 加密 + token 会话
 import { scryptSync, randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
-import { db, now, getSetting, setSetting } from './db/index.js';
+import { db, now, setSetting } from './db/index.js';
 
 // ---------- 用户 CRUD ----------
-const SECRET = process.env.SESSION_SECRET || 'analyst-session-secret';
 
 export function hashPassword(password) {
   const salt = randomBytes(16).toString('hex');

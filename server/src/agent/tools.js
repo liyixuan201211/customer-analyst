@@ -1,5 +1,5 @@
 // Agent 工具集：暴露给大模型的函数定义 + 执行器
-import { customers, chatRecords, tables, products, staff, kb, followups } from '../db/index.js';
+import { customers, chatRecords, tables, products, staff, followups } from '../db/index.js';
 import { webSearch, fetchPage } from '../tools/web.js';
 import { searchKnowledge, ingestDocument } from '../tools/knowledge.js';
 import { parseChatText, toTranscript, saveRecord, guessCustomerName } from '../tools/importer.js';

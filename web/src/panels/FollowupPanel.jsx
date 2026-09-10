@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Plus, CheckCircle2, Trash2, Phone, Mail, MessageCircle, Users2, CalendarClock, Copy, RefreshCw } from 'lucide-react';
 import { api } from '../lib/api.js';
-import { useStore } from '../store/index.js';
+
 import { useI18n } from '../i18n.js';
-import { Section, Card, Tag, Btn, Input, Select, Textarea, Empty } from './ui.jsx';
+import { Card, Tag, Btn, Input, Select, Textarea, Empty } from './ui.jsx';
 
 const TYPES = [['call', 'fu_type_call', Phone], ['email', 'fu_type_email', Mail], ['whatsapp', 'fu_type_whatsapp', MessageCircle], ['meeting', 'fu_type_meeting', Users2], ['other', 'fu_type_other', CalendarClock]];
 const typeIcon = (ty) => (TYPES.find((t) => t[0] === ty) || TYPES[4])[2];
@@ -16,9 +16,9 @@ export default function FollowupPanel({ filter }) {
   const [f, setF] = useState({ customer_id: '', type: 'call', subject: '', note: '', due_at: '' });
   const [showForm, setShowForm] = useState(false);
   const [busy, setBusy] = useState(false);
-  const load = async (st = tab) => { setList(await api.get('/followups?status=' + st)); };
+  const [now, setNow] = useState(0);   // 在数据加载时取值，避免 render 期间调用 Date.now()
+  const load = async (st = tab) => { setList(await api.get('/followups?status=' + st)); setNow(Date.now()); };
   useEffect(() => { api.get('/customers').then(setCustomers); load(tab); }, [tab]);
-  const today = new Date().toISOString().slice(0, 10);
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
   const create = async () => {
     if (!f.customer_id) return; setBusy(true);
@@ -49,7 +49,7 @@ export default function FollowupPanel({ filter }) {
       {list.length === 0 ? <Empty text={t('fu_empty')} /> : list.map((fu) => {
         const Icon = typeIcon(fu.type);
         const dt = fu.due_at ? new Date(fu.due_at) : null;
-        const isDue = dt && dt.getTime() < Date.now() && fu.status === 'pending';
+        const isDue = dt && dt.getTime() < now && fu.status === 'pending';
         return (
           <Card key={fu.id} className={`mb-1.5 ${fu.status === 'done' ? 'opacity-60' : ''}`}>
             <div className="flex items-start gap-2">
@@ -73,7 +73,7 @@ export default function FollowupPanel({ filter }) {
 }
 
 /** 生成跟进邮件/WhatsApp 的展示与操作 */
-export function FollowupMessage({ msg, customerId, onDone }) {
+export function FollowupMessage({ msg, customerId, _onDone }) {
   const { t, locale } = useI18n();
   const [type, setType] = useState(msg?.type || 'email');
   const [language, setLanguage] = useState(msg?.language || (locale === 'en-US' ? 'en' : 'zh'));

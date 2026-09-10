@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Plus, MessageSquare, Trash2, Pencil, Users, Boxes, UserCog, BookOpen, Settings, LayoutDashboard, Sparkles, PanelLeftClose, Search, Sun, Moon, Activity, ChevronDown, LogOut, Globe, UserRound, CalendarCheck } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useI18n, LOCALES } from '../i18n.js';

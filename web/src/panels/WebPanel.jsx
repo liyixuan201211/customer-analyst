@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, ExternalLink } from 'lucide-react';
 import { api } from '../lib/api.js';
 import { useI18n } from '../i18n.js';
-import { Section, Card, Btn, Input, Empty, Tag } from './ui.jsx';
+import { Card, Btn, Input, Empty } from './ui.jsx';
 
 export default function WebPanel({ query, results: init, engine, error }) {
   const { t } = useI18n();

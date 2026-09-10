@@ -1,5 +1,5 @@
 // 语音记录：上传/存储录音，可选 ASR 转写（若配置了 OpenAI 兼容 ASR），转写可并入聊天记录
-import { customers, chatRecords, voiceNotes } from '../db/index.js';
+import { chatRecords, voiceNotes } from '../db/index.js';
 import { activity } from '../auth.js';
 
 const ASR_BASE = process.env.ASR_BASE_URL || '';

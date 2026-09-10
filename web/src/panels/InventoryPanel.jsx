@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useI18n } from '../i18n.js';
 import { Trash2, Plus, TrendingUp, PackagePlus, PackageMinus } from 'lucide-react';
 import { api } from '../lib/api.js';

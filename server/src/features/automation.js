@@ -4,21 +4,8 @@ import { activity } from '../auth.js';
 
 const COMPLAINT = ['投诉', '退款', '退货', '太贵', '别家', '竞品', '失望', '不满', '不行', '换', '取消', '解约'];
 
-function evalRule(rule, ctxUser) {
+function evalRule(rule, _ctxUser) {
   const results = [];
-  const runAction = async (customer, extra = {}) => {
-    const cfg = rule.action_config || {};
-    if (rule.action === 'create_followup') {
-      followups.create({ customer_id: customer.id, type: cfg.type || 'call', subject: cfg.subject || `${rule.name}自动跟进`, note: cfg.note || `由「${rule.name}」触发`, due_at: Date.now() + 24 * 3600 * 1000, assignee_name: ctxUser?.display_name, created_by: ctxUser?.id });
-      return { action: 'create_followup', target: customer.name };
-    }
-    if (rule.action === 'send_survey') {
-      surveys.create({ customer_id: customer.id, title: cfg.subject || '满意度回访', questions: { 满意度: '1-10', 是否复购: '是/否' } });
-      return { action: 'send_survey', target: customer.name };
-    }
-    if (rule.action === 'tag') { customers.update(customer.id, { tags: [...new Set([...(customer.tags || []), cfg.tag || rule.name])] }); return { action: 'tag', target: customer.name }; }
-    return { action: rule.action, target: customer.name };
-  };
 
   const trigger = rule.trigger;
   if (trigger === 'silent_days') {
@@ -30,7 +17,7 @@ function evalRule(rule, ctxUser) {
     const hours = rule.condition?.hours ?? 24; const cutoff = Date.now() - hours * 3600 * 1000;
     for (const o of orders.list({})) { if ((o.order_date || o.created_at) >= cutoff && o.status !== 'cancelled') { const cu = customers.get(o.customer_id); if (cu) results.push({ customer: cu, reason: `新成交 ${o.product_name || ''} ¥${o.amount}`, extra: { } }); } }
   } else if (trigger === 'low_stock') {
-    for (const p of products.list()) { if (p.min_stock > 0 && p.stock < p.min_stock) { const cu = customers.findByName(''); results.push({ customer: null, product: p, reason: `库存不足 ${p.name}（${p.stock}/${p.min_stock}）` }); } }
+    for (const p of products.list()) { if (p.min_stock > 0 && p.stock < p.min_stock) { results.push({ customer: null, product: p, reason: `库存不足 ${p.name}（${p.stock}/${p.min_stock}）` }); } }
   } else if (trigger === 'no_followup') {
     const pending = new Set(followups.list({ status: 'pending' }).map(f => f.customer_id));
     for (const cu of customers.list()) if (cu.id && !pending.has(cu.id)) results.push({ customer: cu, reason: '无进行中跟进', extra: {} });

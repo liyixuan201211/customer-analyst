@@ -2,7 +2,7 @@
 import { customers, chatRecords, followups, orders, tables } from '../db/index.js';
 import { comments } from '../auth.js';
 
-export default function register(api, ctx) {
+export default function register(api, _ctx) {
   api.get('/timeline/:customerId', (c) => {
     const cu = customers.get(c.req.param('customerId'));
     if (!cu) return c.json({ error: 'not found' }, 404);

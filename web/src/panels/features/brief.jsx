@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Tag, Btn, Empty } from '../ui.jsx';
+import { Section, Card, Btn, Empty } from '../ui.jsx';
 
 export default function BriefPanel() {
   const { t, locale } = useI18n(); const Z = locale === 'en-US';

@@ -1,7 +1,8 @@
 // 报表中心 + 定时周报/月报：AI 生成管理层报告，可导出
-import { customers, orders, products, followups, tables } from '../db/index.js';
+import { customers, orders, products, followups } from '../db/index.js';
 import { chatJSON, DEFAULTS } from '../llm/aiping.js';
 import { getSetting, setSetting } from '../db/index.js';
+import { activity } from '../auth.js';
 
 const REPORTS = [
   { id: 'weekly', label: '周报' }, { id: 'monthly', label: '月报' },

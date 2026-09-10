@@ -89,7 +89,7 @@ export async function runAgent({ conversation_id, emit, signal, locale, actor })
 
     // 执行工具
     for (const tc of final.tool_calls) {
-      let args = {};
+      let args;
       try { args = tc.function.arguments ? JSON.parse(tc.function.arguments) : {}; } catch { args = {}; }
       emit({ type: 'tool_call', id: tc.id, name: tc.function.name, args });
       let out;

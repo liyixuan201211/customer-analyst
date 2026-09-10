@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Copy, RefreshCw } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Btn, Input, Select, Textarea, Empty, Tag } from '../ui.jsx';
+import { Section, Card, Btn, Select, Textarea, Empty, Tag } from '../ui.jsx';
 
 export default function TranslatePanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { gen: 'Generate', type: 'Type', lang: 'Language', subject: 'Subject', body: 'Body', copy: 'Copy', cust: 'Customer (optional)', orText: 'Or paste text to translate', genBtn: 'Generate' }
     : { gen: '生成', type: '类型', lang: '语言', subject: '主题', body: '正文', copy: '复制', cust: '客户（可选）', orText: '或粘贴文本直接翻译', genBtn: '生成' };
   const [custs, setCusts] = useState([]); const [langs, setLangs] = useState([]);

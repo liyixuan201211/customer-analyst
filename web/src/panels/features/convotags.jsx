@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
 import { Section, Card, Tag, Btn, Empty } from '../ui.jsx';
 
 export default function ConvotagsPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { sum: 'Summarize all', empty: 'No conversations', run: 'Summarize' }
     : { sum: '批量生成摘要', empty: '暂无会话', run: '生成' };
   const [list, setList] = useState([]); const [busy, setBusy] = useState(false);

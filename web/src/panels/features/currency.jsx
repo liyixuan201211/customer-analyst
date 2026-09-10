@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Save } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Tag, Btn, Input, Empty } from '../ui.jsx';
+import { Section, Card, Btn, Input, Empty } from '../ui.jsx';
 
 const CCY = ['USD', 'EUR', 'JPY', 'GBP'];
 export default function CurrencyPanel() {
@@ -12,7 +12,6 @@ export default function CurrencyPanel() {
   useEffect(() => { api.get('/currency').then(d => { setD(d); setRates(d.rates || {}); }); }, []);
   const save = async () => { await api.post('/currency', { rates }); alert('已保存'); };
   if (!d) return <Empty text={t('loading')} />;
-  const summary = null;
   return (
     <>
       <Section title={TXT.cfg} right={<Btn size="xs" onClick={save}><Save size={11} className="inline" /> {TXT.save}</Btn>}>

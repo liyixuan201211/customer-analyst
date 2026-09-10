@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Loader2, Check, X } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Btn, Select, Empty, Tag } from '../ui.jsx';
+import { Section, Card, Btn, Select, Empty } from '../ui.jsx';
 
 const STAGE_NAME = { profile: '画像', loyalty: '忠诚度', rfm: 'RFM', pricing: '定价', strategy: '策略' };
 export default function MultiagentPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { pick: 'Select customer', product: 'Product (optional)', run: 'Run multi-agent analysis', prompt: 'Or ask the agent' }
     : { pick: '选择客户', product: '商品（可选）', run: '运行多智能体分析', prompt: '或让智能体执行' };
   const [custs, setCusts] = useState([]); const [prods, setProds] = useState([]);

@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export const Section = ({ title, right, children, className = '' }) => (
   <div className={`mb-4 ${className}`}>

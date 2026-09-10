@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trash2, Plus } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
-import { Section, Card, Tag, Btn, Input, Select, Empty, Textarea } from '../ui.jsx';
+import { Section, Card, Tag, Btn, Select, Empty, Textarea } from '../ui.jsx';
 
 const STATUS = [['scheduled', '待发送'], ['sent', '已发送'], ['opened', '已打开'], ['replied', '已回复'], ['failed', '失败']];
 const STATUS_C = { scheduled: 'amber', sent: 'blue', opened: 'blue', replied: 'green', failed: 'red' };

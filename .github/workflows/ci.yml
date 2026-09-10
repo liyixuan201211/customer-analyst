@@ -23,9 +23,8 @@ jobs:
       - name: Build web (frontend)
         working-directory: web
         run: pnpm build
-      - name: Lint backend syntax
-        run: |
-          for f in server/src/*.js server/src/features/*.js; do node --check "$f" || exit 1; done
+      - name: Lint (ESLint: no-undef / no-unused-vars / react-hooks)
+        run: pnpm lint
       - name: Boot smoke (server)
         env:
           AIPING_BASE_URL: https://aiping.cn/api/v1

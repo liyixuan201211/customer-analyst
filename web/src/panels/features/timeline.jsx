@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
 import { Section, Card, Tag, Select, Empty } from '../ui.jsx';
@@ -6,7 +6,7 @@ import { MessageSquare, Phone, Mail, Users2, FileText, Table2, MessageCircle } f
 
 const EVICON = { chat: MessageSquare, 'followup': Phone, 'followup-done': Phone, 'order-paid': Mail, 'order-pending': MessageCircle, 'comment': Users2, 'table': Table2, default: FileText };
 export default function TimelinePanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { pick: 'Select customer', empty: 'Select a customer to view their timeline' }
     : { pick: '选择客户', empty: '选择客户以查看其触达时间线' };
   const [custs, setCusts] = useState([]); const [cid, setCid] = useState(''); const [data, setData] = useState(null);

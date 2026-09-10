@@ -7,7 +7,6 @@ export default function register(api) {
     const recs = chatRecords.list(cu.id);
     const last = recs.map(r => r.created_at).sort((a, b) => b - a)[0];
     const recency = last ? Math.floor((Date.now() - last) / 864e5) : 365;
-    const freq = Math.max(1, recs.length || 1);              // 互动频次
     const avgOrder = o.count ? o.amount / o.count : 0;
     const loyalty = cu.loyalty?.score ?? 50;
     // 简单预测：年均购买次数 × 平均客单 × 忠诚系数 × 期望周期(3年)

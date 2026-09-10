@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Clock } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
 import { Section, Card, Tag, Btn, Select, Empty } from '../ui.jsx';
 
 export default function SchedulePanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { pick: 'Select customer', rec: 'Recommended time', channel: 'Channel', create: 'Create follow-up' }
     : { pick: '选择客户', rec: '推荐时段', channel: '渠道', create: '创建跟进任务' };
   const [custs, setCusts] = useState([]); const [cid, setCid] = useState(''); const [r, setR] = useState(null);

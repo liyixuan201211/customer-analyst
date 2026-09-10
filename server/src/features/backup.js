@@ -1,7 +1,7 @@
 // 全库备份/恢复：导出全量 JSON，可下载/恢复
 import { db } from '../db/index.js';
 import { mkdirSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import { activity } from '../auth.js';
 
 const SPACE = resolve(process.cwd(), '../data/backups');

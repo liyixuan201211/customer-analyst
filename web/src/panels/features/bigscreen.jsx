@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Maximize2, RefreshCw, X } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
 import { Section, Card, Empty } from '../ui.jsx';
-import { SegmentDonut, ScoreBars } from '../../components/charts.jsx';
+import { SegmentDonut } from '../../components/charts.jsx';
 
 export default function BigscreenPanel() {
   const { t, locale } = useI18n(); const Z = locale === 'en-US';
@@ -14,7 +14,6 @@ export default function BigscreenPanel() {
   useEffect(() => { load(); const iv = setInterval(load, 30000); return () => clearInterval(iv); }, []);
   const toggleFs = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen?.(); setFs(!fs); };
   if (!d) return <Empty text={t('loading')} />;
-  const revenue = (d.revenueByMonth || []).slice(-6);
   return (
     <>
       <Section title="Big screen" right={<div className="flex gap-1.5"><button onClick={toggleFs} className="rounded-md bg-elev border border-line-2 hover:bg-bg-3 px-2 py-1 text-xs flex items-center gap-1"><Maximize2 size={12} className="inline" /> {fs ? TXT.exit : TXT.enter}</button><button onClick={load} className="rounded-md bg-elev border border-line-2 hover:bg-bg-3 px-2 py-1 text-xs flex items-center gap-1"><RefreshCw size={12} className="inline" /> {TXT.auto} 30s</button></div>}>

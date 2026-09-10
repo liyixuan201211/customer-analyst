@@ -1,5 +1,5 @@
 // 多币种 + 汇率换算：配置汇率，报表按币种折算
-import { getSetting, setSetting, orders, customers } from '../db/index.js';
+import { getSetting, setSetting, orders } from '../db/index.js';
 import { activity } from '../auth.js';
 
 export default function register(api, ctx) {

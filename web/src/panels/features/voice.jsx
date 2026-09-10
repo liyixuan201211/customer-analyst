@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trash2, Plus } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
 import { Section, Card, Tag, Btn, Input, Select, Empty, Textarea } from '../ui.jsx';
 
 export default function VoicePanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { add: 'Add voice note', customer: 'Customer', file: 'File name', duration: 'Duration(s)', note: 'Summary / transcript', send: 'Save', empty: 'No voice notes' }
     : { add: '新增语音记录', customer: '客户', file: '文件名', duration: '时长(秒)', note: '摘要/转写', send: '保存', empty: '暂无语音记录' };
   const [list, setList] = useState([]); const [custs, setCusts] = useState([]);

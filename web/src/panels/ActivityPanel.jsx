@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import { Users as UsersIcon, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useI18n } from '../i18n.js';
 import { Section, Card, Tag, Btn, Input, Select, Empty } from './ui.jsx';
 
 const ACT = { create: 'a_act_create', update: 'a_act_update', import: 'a_act_import', analyze: 'a_act_analyze', pricing: 'a_act_pricing', assign: 'a_act_assign', add: 'a_act_add', comment: 'a_act_comment', chat: 'a_act_chat', delete: 'a_act_delete', invite: 'a_act_invite' };
 const ENT = { customer: 'a_ent_customer', product: 'a_ent_product', staff: 'a_ent_staff', kb: 'a_ent_kb', conversation: 'a_ent_conversation' };
-const colorFor = (action) => ({ create: 'green', update: 'blue', import: 'indigo', analyze: 'indigo', pricing: 'amber', assign: 'blue', add: 'green', comment: 'blue', chat: 'gray', delete: 'red', invite: 'gray' }[action] || 'gray');
 
 export function ActivityPanel() {
   const { activity, loadActivity } = useStore();
@@ -29,7 +28,7 @@ export function ActivityPanel() {
 }
 
 export function MembersPanel() {
-  const { members, loadMembers, user, updateMe } = useStore();
+  const { members, loadMembers, user } = useStore();
   const { t, locale } = useI18n();
   const [f, setF] = React.useState({ username: '', password: '', display_name: '', role: 'member', locale });
   useEffect(() => { loadMembers(); }, []);

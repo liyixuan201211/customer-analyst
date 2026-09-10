@@ -1,8 +1,7 @@
-import React from 'react';
-import { Sunrise, Receipt, AlertTriangle, Scale, MessagesSquare, ClipboardList, BadgeCheck, History, LayoutDashboard, Boxes, UserCog, Activity, BookOpen, Settings } from 'lucide-react';
+
+import { Sunrise, Receipt, AlertTriangle, Scale, MessagesSquare, ClipboardList, BadgeCheck, History, LayoutDashboard, Boxes } from 'lucide-react';
 import { useState } from 'react';
 import { useStore } from '../store/index.js';
-import { useI18n } from '../i18n.js';
 import { FEATURE_TITLES } from '../panels/features/index.jsx';
 
 const ICONS = { Sunrise, Receipt, AlertTriangle, Scale, MessagesSquare, ClipboardList, BadgeCheck, History, LayoutDashboard };
@@ -11,7 +10,6 @@ const VIEWS = Object.keys(FEATURE_TITLES);
 
 export function FeatureNav() {
   const { panel, showPanel } = useStore();
-  const { t } = useI18n();
   const [all, setAll] = useState(false);
   const items = all ? VIEWS : VIEWS.slice(0, 9);
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Plus, Trash2, Play } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
@@ -7,7 +7,7 @@ import { Section, Card, Tag, Btn, Input, Select, Empty } from '../ui.jsx';
 const TRIGGERS = [['silent_days', '沉默天数'], ['complaint', '检测到投诉'], ['new_order', '新成交'], ['low_stock', '低库存'], ['no_followup', '无跟进']];
 const ACTIONS = [['create_followup', '自动建跟进'], ['send_survey', '自动发问卷'], ['tag', '自动打标签']];
 export default function AutomationPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { rules: 'Rules', add: 'New rule', run: 'Run now', name: 'Name', trigger: 'Trigger', action: 'Action', days: 'Days', result: 'Triggered', empty: 'No rules', log: 'Run log' }
     : { rules: '触发规则', add: '新建规则', run: '立即执行', name: '名称', trigger: '触发', action: '动作', days: '天数', result: '已触发', empty: '暂无规则', log: '执行日志' };
   const [list, setList] = useState([]); const [f, setF] = useState({ name: '', trigger: 'silent_days', days: 30, action: 'create_followup', subject: '' });

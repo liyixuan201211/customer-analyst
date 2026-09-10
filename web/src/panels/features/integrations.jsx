@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trash2, Plus, Send } from 'lucide-react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
 import { Section, Card, Tag, Btn, Input, Empty } from '../ui.jsx';
 
 export default function IntegrationsPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { add: 'Add webhook', name: 'Name', url: 'URL', event: 'Event', apidoc: 'Open API', auth: 'Auth', test: 'Test' }
     : { add: '新增 Webhook', name: '名称', url: 'URL', event: '事件', apidoc: '开放 API', auth: '鉴权', test: '测试' };
   const [list, setList] = useState([]); const [info, setInfo] = useState(null);

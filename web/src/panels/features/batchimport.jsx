@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useI18n } from '../../i18n.js';
 import { api } from '../../lib/api.js';
 import { Section, Card, Btn, Select, Tag } from '../ui.jsx';
 
 export default function BatchimportPanel() {
-  const { t, locale } = useI18n(); const Z = locale === 'en-US';
+  const { locale } = useI18n(); const Z = locale === 'en-US';
   const TXT = Z ? { text: 'Paste batch chats / CSV', sep: 'Separator', parse: 'Parse CSV', import: 'Import all', result: 'Result', errors: 'Errors' }
     : { text: '粘贴批量聊天记录 / CSV', sep: '分隔符', parse: '解析 CSV', import: '全部导入', result: '导入结果', errors: '错误' };
   const [mode, setMode] = useState('text'); const [sep, setSep] = useState(',');

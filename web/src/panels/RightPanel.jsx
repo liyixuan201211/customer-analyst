@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, RefreshCw, PanelRightClose } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useI18n } from '../i18n.js';

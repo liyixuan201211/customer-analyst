@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 // 错误边界：单个面板/组件渲染崩溃时兜底，不让整个应用白屏
 export default class ErrorBoundary extends Component {

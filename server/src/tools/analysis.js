@@ -149,7 +149,7 @@ export function segmentAll(customers, recordsByCust = {}) {
 export async function generateFollowupMessage(customerId, { type = 'email', language = 'zh' }) {
   const cu = customers.get(customerId);
   if (!cu) throw new Error('客户不存在');
-  const { transcript, records } = gatherCustomerContext(customerId, 7000);
+  const { transcript } = gatherCustomerContext(customerId, 7000);
   const langName = language === 'en' ? 'English' : '中文';
   const langRule = language === 'en'
     ? '强制要求：subject 与 body 必须全部使用 English 撰写（专业商务邮件/消息），不得出现中文。即使背景资料是中文，输出也必须为纯英文。'

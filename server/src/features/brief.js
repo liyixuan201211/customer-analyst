@@ -1,5 +1,5 @@
 // 每日简报：今日跟进/逾期/高危流失/库存/新成交 聚合摘要
-import { followups, products, orders, tables, customers } from '../db/index.js';
+import { followups, products, orders, customers } from '../db/index.js';
 import { chatJSON, DEFAULTS } from '../llm/aiping.js';
 import { computeRFM } from '../tools/analysis.js';
 
@@ -7,11 +7,9 @@ export default function register(api) {
   api.get('/brief', async (c) => {
     const today = followups.list({ status: 'today' });
     const overdue = followups.list({ status: 'open' });
-    const upcoming = followups.list({ status: 'upcoming' });
     const ps = products.list();
     const lowStock = ps.filter(p => p.min_stock > 0 && p.stock < p.min_stock);
     const ordersToday = orders.list({}).filter(o => o.order_date && new Date(o.order_date).toDateString() === new Date().toDateString());
-    const newTables = tables.list().slice(0, 3);
     const cs = customers.list();
     const rfmList = cs.map(x => computeRFM(x, []));
     const churn = rfmList.filter(x => x.segment.includes('挽留')).sort((a, b) => b.recency_days - a.recency_days).slice(0, 5);
