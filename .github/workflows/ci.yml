@@ -23,7 +23,7 @@ jobs:
       - name: Build web (frontend)
         working-directory: web
         run: pnpm build
-      - name: Lint (ESLint: no-undef / no-unused-vars / react-hooks)
+      - name: "Lint (ESLint: no-undef / no-unused-vars / react-hooks)"
         run: pnpm lint
       - name: Boot smoke (server)
         env:
