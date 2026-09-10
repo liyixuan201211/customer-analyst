@@ -59,7 +59,7 @@ const truncate = (s, n = 12000) => (s.length > n ? s.slice(0, n) + `\n...(结果
  * {type:'tool_call', id, name, args} {type:'tool_result', id, name, result, panel}
  * {type:'message_end', id}  {type:'done'}  {type:'error', message}
  */
-export async function runAgent({ conversation_id, emit, signal, locale }) {
+export async function runAgent({ conversation_id, emit, signal, locale, actor }) {
   const conv = conversations.get(conversation_id);
   if (!conv) throw new Error('会话不存在');
   const settings = getSetting('models', {});
